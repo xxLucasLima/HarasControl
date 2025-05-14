@@ -1,0 +1,6 @@
+@ArasControl_HostAddress = http://localhost:5289
+
+GET {{ArasControl_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
