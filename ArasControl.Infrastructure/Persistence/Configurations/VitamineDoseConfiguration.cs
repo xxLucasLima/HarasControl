@@ -23,7 +23,7 @@ namespace ArasControl.Infrastructure.Persistence.Configurations
             builder.Property(vd => vd.Unit)
                    .IsRequired()
                    .HasMaxLength(20);
-            builder.Property(vd => vd.AppliedAt).IsRequired();
+            builder.Property(vd => vd.AdministeredAt).IsRequired();
             builder.Property(vd => vd.Notes).HasMaxLength(500);
 
             builder.HasOne<Animal>()

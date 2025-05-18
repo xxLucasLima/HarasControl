@@ -19,7 +19,7 @@ namespace ArasControl.Infrastructure.Persistence.Configurations
             builder.Property(vr => vr.VaccineName)
                    .IsRequired()
                    .HasMaxLength(100);
-            builder.Property(vr => vr.AppliedAt).IsRequired();
+            builder.Property(vr => vr.AdministeredAt).IsRequired();
             builder.Property(vr => vr.NextDue);
             builder.Property(vr => vr.FrequencyDays);
             builder.Property(vr => vr.ReminderDaysBefore).IsRequired();

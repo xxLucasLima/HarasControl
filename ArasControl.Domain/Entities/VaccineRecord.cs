@@ -11,7 +11,7 @@ namespace ArasControl.Domain.Entities
         public Guid Id { get; private set; }
         public Guid AnimalId { get; private set; }
         public string VaccineName { get; private set; }
-        public DateTime AppliedAt { get; private set; }
+        public DateTime AdministeredAt { get; private set; }
         public DateTime? NextDue { get; private set; }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ArasControl.Domain.Entities
             Guid id,
             Guid animalId,
             string vaccineName,
-            DateTime appliedAt,
+            DateTime administeredAt,
             DateTime? nextDue = null,
             int? frequencyDays = null,
             int reminderDaysBefore = 7,
@@ -42,14 +42,14 @@ namespace ArasControl.Domain.Entities
             if (id == Guid.Empty) throw new ArgumentException("Invalid VaccineRecord Id.", nameof(id));
             if (animalId == Guid.Empty) throw new ArgumentException("AnimalId is required.", nameof(animalId));
             if (string.IsNullOrWhiteSpace(vaccineName)) throw new ArgumentException("VaccineName is required.", nameof(vaccineName));
-            if (appliedAt > DateTime.UtcNow) throw new ArgumentException("AppliedAt cannot be in the future.", nameof(appliedAt));
+            if (administeredAt > DateTime.UtcNow) throw new ArgumentException("AppliedAt cannot be in the future.", nameof(administeredAt));
             if (frequencyDays.HasValue && frequencyDays <= 0) throw new ArgumentException("FrequencyDays must be positive.", nameof(frequencyDays));
             if (reminderDaysBefore < 0) throw new ArgumentException("ReminderDaysBefore cannot be negative.", nameof(reminderDaysBefore));
 
             Id = id;
             AnimalId = animalId;
             VaccineName = vaccineName;
-            AppliedAt = appliedAt;
+            AdministeredAt = administeredAt;
             NextDue = nextDue;
             FrequencyDays = frequencyDays;
             ReminderDaysBefore = reminderDaysBefore;

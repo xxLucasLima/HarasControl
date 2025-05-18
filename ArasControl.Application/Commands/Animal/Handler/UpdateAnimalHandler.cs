@@ -36,3 +36,4 @@ namespace ArasControl.Application.Commands.Animal.Handler
             return Unit.Value;
         }
     }
+}
