@@ -2,10 +2,12 @@
 using ArasControl.Application.DTOs;
 using ArasControl.Application.Queries.AnimalOwner;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArasControl.WebApi.Controllers
 {
+    [Authorize(Roles = "AnimalOwner")]
     [ApiController]
     [Route("api/[controller]")]
     public class AnimalOwnerController : ControllerBase

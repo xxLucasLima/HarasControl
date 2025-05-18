@@ -2,18 +2,35 @@
 using ArasControl.Domain.Entities.Enum;
 using ArasControl.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ArasControl.Infrastructure.Persistence
 {
     public static class DbInitializer
     {
         /// <summary>
-        /// Aplica migrações e popula o banco com dados de teste se estiver vazio.
+        /// Aplica migrações, garante as roles e popula o banco com dados de teste se estiver vazio.
         /// </summary>
-        public static void Initialize(AppDbContext context)
+        public static async Task InitializeAsync(IServiceProvider serviceProvider)
         {
+            // Resolve o contexto e o RoleManager
+            var context = serviceProvider.GetRequiredService<AppDbContext>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
             // Aplica migrations pendentes
             context.Database.Migrate();
+
+            // Cria roles se não existirem
+            string[] roles = new[] { "HarasOwner", "AnimalOwner" };
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                    await roleManager.CreateAsync(new IdentityRole(role));
+            }
 
             // Se já existe ao menos um Haras, presume que já foi seedado
             if (context.Haras.Any())
@@ -112,5 +129,3 @@ namespace ArasControl.Infrastructure.Persistence
         }
     }
 }
-
-
