@@ -70,5 +70,12 @@ namespace ArasControl.Infrastructure.Repositories
             _context.VitaminDoses.Add(dose);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Animal>> ListByHarasAsync(Guid harasId)
+        {
+            return await _context.Animals
+                .Where(a => a.HarasId == harasId)
+                .ToListAsync();
+        }
     }
 }

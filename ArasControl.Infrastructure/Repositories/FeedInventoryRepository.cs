@@ -25,6 +25,17 @@ namespace ArasControl.Infrastructure.Repositories
                 .FirstOrDefaultAsync(fi => fi.AnimalId == animalId);
         }
 
+        public async Task<FeedInventory> GetByIdAsync(Guid id)
+        {
+            return await _context.FeedInventories
+                .FirstOrDefaultAsync(fi => fi.Id == id);
+        }
+
+        public async Task<IEnumerable<FeedInventory>> ListAsync()
+        {
+            return await _context.FeedInventories.ToListAsync();
+        }
+
         public async Task AddAsync(FeedInventory inventory)
         {
             _context.FeedInventories.Add(inventory);

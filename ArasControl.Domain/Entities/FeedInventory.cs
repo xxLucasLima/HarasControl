@@ -68,5 +68,31 @@ namespace ArasControl.Domain.Entities
             CurrentQuantity -= amount;
             return AlertEnabled && CurrentQuantity <= ThresholdQuantity;
         }
+
+        public void UpdateCurrentQuantity(decimal quantity)
+        {
+            if (quantity < 0)
+                throw new ArgumentException("Quantidade não pode ser negativa.", nameof(quantity));
+            CurrentQuantity = quantity;
+        }
+
+        public void UpdateUnit(string unit)
+        {
+            if (string.IsNullOrWhiteSpace(unit))
+                throw new ArgumentException("Unidade obrigatória.", nameof(unit));
+            Unit = unit;
+        }
+
+        public void UpdateThresholdQuantity(decimal threshold)
+        {
+            if (threshold < 0)
+                throw new ArgumentException("Limite não pode ser negativo.", nameof(threshold));
+            ThresholdQuantity = threshold;
+        }
+
+        public void UpdateAlert(bool enabled)
+        {
+            AlertEnabled = enabled;
+        }
     }
 }

@@ -32,5 +32,8 @@ namespace ArasControl.Domain.Interfaces
 
         /// <summary>Adiciona um registro de vitamina (VitaminDose) para o animal.</summary>
         Task AddVitaminDoseAsync(VitaminDose dose);
+
+        Task<IEnumerable<Animal>> ListByHarasAsync(Guid harasId);
+
     }
 }

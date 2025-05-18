@@ -12,5 +12,7 @@ namespace ArasControl.Domain.Interfaces
         Task<FeedInventory> GetByAnimalIdAsync(Guid animalId);
         Task AddAsync(FeedInventory inventory);
         Task UpdateAsync(FeedInventory inventory);
+        Task<FeedInventory> GetByIdAsync(Guid id);    
+        Task<IEnumerable<FeedInventory>> ListAsync();
     }
 }
