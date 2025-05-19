@@ -14,7 +14,7 @@ namespace ArasControl.Domain.Entities
         public decimal Amount { get; private set; }
         public string Unit { get; private set; }
         public DateTime AdministeredAt { get; private set; }
-        public string Notes { get; private set; }
+        public string? Notes { get; private set; }
 
         public VitaminDose(
             Guid id,

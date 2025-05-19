@@ -26,7 +26,7 @@ namespace ArasControl.Domain.Entities
         /// Whether reminder notifications are enabled for this record.
         /// </summary>
         public bool ReminderEnabled { get; private set; }
-        public string Notes { get; private set; }
+        public string? Notes { get; private set; }
 
         public VaccineRecord(
             Guid id,

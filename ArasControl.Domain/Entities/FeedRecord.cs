@@ -27,7 +27,7 @@ namespace ArasControl.Domain.Entities
         public DateTime FedAt { get; private set; }
 
         /// <summary>Observações adicionais (lote, marca, etc.).</summary>
-        public string Notes { get; private set; }
+        public string? Notes { get; private set; }
 
         public FeedRecord(Guid id, Guid animalId, decimal amount, string unit, DateTime fedAt, string notes = null)
         {

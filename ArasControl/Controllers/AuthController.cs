@@ -1,7 +1,6 @@
 ﻿using ArasControl.Application.DTOs;
-using ArasControl.Domain.Entities.Auth.ArasControl.Domain.Entities.Auth;
+using ArasControl.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

@@ -29,6 +29,7 @@ namespace ArasControl.Domain.Entities
         public IReadOnlyCollection<VaccineRecord> VaccineRecords => _vaccineRecords.AsReadOnly();
 
 
+        protected Animal() { }
 
         public Animal(
             Guid id,

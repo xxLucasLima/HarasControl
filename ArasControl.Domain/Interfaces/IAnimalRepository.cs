@@ -17,6 +17,7 @@ namespace ArasControl.Domain.Interfaces
 
         /// <summary>Adiciona um novo animal.</summary>
         Task AddAsync(Animal animal);
+        Task<IEnumerable<Animal>> ListAsync();
 
         /// <summary>Atualiza os dados de um animal existente.</summary>
         Task UpdateAsync(Animal animal);

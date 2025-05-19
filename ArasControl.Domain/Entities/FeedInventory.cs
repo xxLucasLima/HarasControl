@@ -32,18 +32,19 @@ namespace ArasControl.Domain.Entities
         /// Indica se o sistema deve disparar alerta quando o estoque estiver baixo.
         /// </summary>
         public bool AlertEnabled { get; private set; }
+        protected FeedInventory() { }
 
-        public FeedInventory(Guid id, Guid animalId, decimal initialQuantity, string unit, decimal thresholdQuantity, bool alertEnabled = true)
+        public FeedInventory(Guid id, Guid animalId, decimal currentQuantity, string unit, decimal thresholdQuantity, bool alertEnabled = true)
         {
             if (id == Guid.Empty) throw new ArgumentException("Invalid FeedInventory Id.", nameof(id));
             if (animalId == Guid.Empty) throw new ArgumentException("AnimalId is required.", nameof(animalId));
-            if (initialQuantity < 0) throw new ArgumentException("InitialQuantity cannot be negative.", nameof(initialQuantity));
+            if (currentQuantity < 0) throw new ArgumentException("InitialQuantity cannot be negative.", nameof(currentQuantity));
             if (string.IsNullOrWhiteSpace(unit)) throw new ArgumentException("Unit is required.", nameof(unit));
             if (thresholdQuantity < 0) throw new ArgumentException("ThresholdQuantity cannot be negative.", nameof(thresholdQuantity));
 
             Id = id;
             AnimalId = animalId;
-            CurrentQuantity = initialQuantity;
+            CurrentQuantity = currentQuantity;
             Unit = unit;
             ThresholdQuantity = thresholdQuantity;
             AlertEnabled = alertEnabled;

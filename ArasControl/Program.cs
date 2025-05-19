@@ -1,15 +1,31 @@
 using System.Text;
-using ArasControl.Domain.Entities.Auth.ArasControl.Domain.Entities.Auth;
+using ArasControl.Application.Queries.Animal;
+using ArasControl.Domain.Entities.Auth;
 using ArasControl.Infrastructure.Extensions;
 using ArasControl.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "ArasControl API",
+        Version = "v1"
+    });
+});
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(GetAnimalByIdQuery).Assembly));
+
+Console.WriteLine("CONNSTR: " + builder.Configuration.GetConnectionString("DefaultConnection"));
+
 // Configuração do JWT
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "KeepMeWhereTheLightIs";
+var jwtKey = builder.Configuration["Jwt:Key"] ?? "KeepMeWhereTheLightIsLetItShineOn";
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "ArasControl";
 
 
@@ -48,8 +64,12 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

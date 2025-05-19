@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ArasControl.Domain.Entities.Auth;
 
 namespace ArasControl.Infrastructure.Persistence
 {
@@ -17,19 +18,52 @@ namespace ArasControl.Infrastructure.Persistence
         /// </summary>
         public static async Task InitializeAsync(IServiceProvider serviceProvider)
         {
-            // Resolve o contexto e o RoleManager
-            var context = serviceProvider.GetRequiredService<AppDbContext>();
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             // Aplica migrations pendentes
             context.Database.Migrate();
 
-            // Cria roles se não existirem
+            // CRIANDO ROLES
             string[] roles = new[] { "HarasOwner", "AnimalOwner" };
             foreach (var role in roles)
             {
                 if (!await roleManager.RoleExistsAsync(role))
                     await roleManager.CreateAsync(new IdentityRole(role));
+            }
+
+            // CRIANDO USUÁRIOS PADRÃO
+
+            // Usuário HarasOwner
+            var harasOwnerEmail = "harasowner@sample.com";
+            if (await userManager.FindByEmailAsync(harasOwnerEmail) == null)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = harasOwnerEmail,
+                    Email = harasOwnerEmail,
+                    EmailConfirmed = true,
+                    RoleType = "HarasOwner" // <-- Corrigido aqui!
+                };
+                await userManager.CreateAsync(user, "SenhaForte123!"); // Use senha forte aqui
+                await userManager.AddToRoleAsync(user, "HarasOwner");
+            }
+
+            // Usuário AnimalOwner
+            var animalOwnerEmail = "animalowner@sample.com";
+            if (await userManager.FindByEmailAsync(animalOwnerEmail) == null)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = animalOwnerEmail,
+                    Email = animalOwnerEmail,
+                    EmailConfirmed = true,
+                    RoleType = "AnimalOwner" // <-- Corrigido aqui!
+                };
+                await userManager.CreateAsync(user, "SenhaForte123!"); // Use senha forte aqui
+                await userManager.AddToRoleAsync(user, "AnimalOwner");
             }
 
             // Se já existe ao menos um Haras, presume que já foi seedado
@@ -97,7 +131,8 @@ namespace ArasControl.Infrastructure.Persistence
                     animal.Id,
                     5m,
                     "kg",
-                    DateTime.UtcNow.AddDays(-1)
+                    DateTime.UtcNow.AddDays(-1),
+                    notes: "" // evita NULL
                 );
                 context.FeedRecords.Add(feedRecord);
 
@@ -109,7 +144,9 @@ namespace ArasControl.Infrastructure.Persistence
                     DateTime.UtcNow.AddMonths(-6),
                     DateTime.UtcNow.AddMonths(6),
                     frequencyDays: 365,
-                    reminderDaysBefore: 30
+                    reminderDaysBefore: 30,
+                    reminderEnabled: true,
+                    notes: "" // evita NULL
                 );
                 context.VaccineRecords.Add(vaccineRecord);
 
@@ -120,7 +157,8 @@ namespace ArasControl.Infrastructure.Persistence
                     "Vitamin B",
                     5m,
                     "mg",
-                    DateTime.UtcNow.AddDays(-2)
+                    DateTime.UtcNow.AddDays(-2),
+                    notes: "" // evita NULL
                 );
                 context.VitaminDoses.Add(vitaminDose);
             }

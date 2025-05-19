@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ArasControl.Domain.Entities;
-using ArasControl.Domain.Entities.Auth.ArasControl.Domain.Entities.Auth;
+using ArasControl.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +29,13 @@ namespace ArasControl.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Animal>(entity =>
+            {
+                entity.OwnsOne(a => a.Dimensions);
+            });
         }
     }
 }

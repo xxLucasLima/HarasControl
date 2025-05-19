@@ -4,6 +4,7 @@
     {
         public double WeightKg { get; private set; }
         public double HeightCm { get; private set; }
+        protected AnimalDimensions() { }
 
         public AnimalDimensions(double weightKg, double heightCm)
         {

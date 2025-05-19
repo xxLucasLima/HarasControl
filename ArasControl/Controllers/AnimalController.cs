@@ -57,7 +57,7 @@ namespace ArasControl.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AnimalDto>>> GetAll()
         {
-            var result = await _mediator.Send(new ListAnimalsByOwnerQuery(Guid.Empty));
+            var result = await _mediator.Send(new ListAnimalsQuery());
             return Ok(result);
         }
 

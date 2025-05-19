@@ -77,5 +77,11 @@ namespace ArasControl.Infrastructure.Repositories
                 .Where(a => a.HarasId == harasId)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Animal>> ListAsync()
+        {
+            return await _context.Animals.ToListAsync();
+
+        }
     }
 }
