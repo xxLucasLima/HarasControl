@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+
+// Paleta 
+$color-dark:      #2d2d29;
+$color-blue:      #215a6d;
+$color-teal:      #3ca2a2;
+$color-green:     #92c7a3;
+$color-bg:        #dfece6;
+$color-white:     #fff;
+$color-error:     #e53e3e;
+
+$primary: $color-teal;
+$accent: $color-green;
+$warn: $color-error;
+$background: $color-bg;
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $background;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 20%;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  h2.login-title {
+    text-align: center;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: $color-blue;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+
