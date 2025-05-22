@@ -39,19 +39,19 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.invalid || this.loading) return;
-    this.loginError = '';
-    this.loading = true;
+  if (this.loginForm.invalid || this.loading) return;
+  this.loginError = '';
+  this.loading = true;
 
-    this.authService.login(this.loginForm.value).subscribe({
-      next: () => {
-        this.loading = false;
-        this.router.navigate(['/dashboard']);
-      },
-      error: () => {
-        this.loading = false;
-        this.loginError = 'Email ou senha inválidos';
-      },
-    });
+  this.authService.login(this.loginForm.value).subscribe({
+    next: () => {
+      this.loading = false;
+      this.router.navigate(['/dashboard']); // <-- esse é o destino!
+    },
+    error: () => {
+      this.loading = false;
+      this.loginError = 'Email ou senha inválidos';
+    },
+  });
   }
 }

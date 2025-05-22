@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'https://seu-backend/api/auth'; // Ajusta pra URL do teu back
+  private apiUrl = 'https://localhost:7004/api/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +19,4 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
   }
-
-  // Outras funções: verificar login, pegar user, etc.
 }
