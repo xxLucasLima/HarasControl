@@ -1,18 +1,58 @@
-.dashboard-container {
-  min-height: 100vh;
+// Paleta de cores
+$color-dark: #2d2d29;
+$color-blue: #215a6d;
+$color-teal: #3ca2a2;
+$color-green: #92c7a3;
+$color-bg: #dfece6;
+$color-white: #fff;
+
+.dashboard-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1200;
+  background: $color-teal !important;
+  color: $color-white !important;
+  box-shadow: 0 2px 8px #2d2d2944;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #dfece6;
-  color: #215a6d;
 }
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #3ca2a2;
+
+.dashboard-navbar-title {
+  margin-left: 1rem;
+  font-weight: 700;
+  font-size: 2.18rem;
+  letter-spacing: 0.03em;
 }
-p {
-  font-size: 1.1rem;
-  color: #2d2d29;
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dashboard-main {
+  display: flex;
+  height: 100vh;
+  background: $color-teal;
+  padding-top: 64px; 
+}
+
+.dashboard-container {
+  flex: 1;
+  height: calc(100vh - 64px);
+  width: 64px
+
+}
+
+.dashboard-sidenav {
+  background: $color-bg;
+  border-right: 1px solid $color-green;
+  padding-top: 1.5rem;
+  color: $color-dark;
+  width: 25vh;
+  box-shadow: 1px 0 4px #2d2d2922;
+}
+
+.dashboard-content {
+  padding: 2rem 1.5rem 0 1.5rem;
+  background: #f5f5f7;
 }

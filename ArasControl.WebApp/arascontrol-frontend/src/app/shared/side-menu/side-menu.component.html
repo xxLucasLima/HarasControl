@@ -1,0 +1,29 @@
+<mat-nav-list>
+  <ng-container *ngFor="let option of filteredOptions">
+    <ng-container *ngIf="option.children?.length; else normalOption">
+      <a mat-list-item (click)="toggleDropdown(option)" [class.menu-dropdown-active]="isDropdownOpen(option)"
+        style="cursor: pointer">
+        <div style="display: inline-flex; align-items: end;">
+          <mat-icon style=" font-size: 30px; width: 30px; height: 30px; ">{{ option.icon }}</mat-icon>
+          <span style="flex: 1">{{ option.label }}</span>
+        </div>
+        <mat-icon>{{ isDropdownOpen(option) ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </a>
+      <ng-container *ngIf="isDropdownOpen(option)">
+        <a mat-list-item *ngFor="let child of option.children" [routerLink]="child.route" routerLinkActive="active-menu"
+          style="padding-left: 40px">
+          <div style="display: inline-flex; align-items: end;">
+            <mat-icon style=" font-size: 30px; width: 30px; height: 30px; ">{{ child.icon }}</mat-icon>
+            <span>{{ child.label }}</span>
+          </div>
+        </a>
+      </ng-container>
+    </ng-container>
+    <ng-template #normalOption>
+      <a mat-list-item [routerLink]="option.route" routerLinkActive="active-menu">
+        <mat-icon>{{ option.icon }}</mat-icon>
+        {{ option.label }}
+      </a>
+    </ng-template>
+  </ng-container>
+</mat-nav-list>

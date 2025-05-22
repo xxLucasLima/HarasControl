@@ -1,4 +1,33 @@
-<div class="dashboard-container">
-  <h1>Bem-vindo ao Painel Aras Control!</h1>
-  <p>Você está autenticado. Agora é só sucesso!</p>
+<mat-toolbar color="primary" class="dashboard-navbar">
+  <button mat-icon-button (click)="toggleDrawer()" aria-label="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="dashboard-navbar-title">Haras Control</span>
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Perfil">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      Perfil
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Sair
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div class="dashboard-main">
+  <mat-drawer-container class="dashboard-container">
+    <mat-drawer #drawer mode="side" [opened]="drawerOpened" class="dashboard-sidenav">
+      <app-side-menu></app-side-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="dashboard-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

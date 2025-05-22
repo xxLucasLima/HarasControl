@@ -19,4 +19,23 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
   }
+
+  getUserRole(): string {
+    const token = localStorage.getItem('token');
+    if (!token) return '';
+
+    // Decode a segunda parte do JWT (payload)
+    const payload = token.split('.')[1];
+    if (!payload) return '';
+
+    try {
+      const decoded = JSON.parse(atob(payload));
+      return decoded.role
+        || decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+        || '';
+    } catch {
+      return '';
+    }
+  }
 }
+

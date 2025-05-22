@@ -40,7 +40,7 @@ namespace ArasControl.WebApi.Controllers
         {
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Role, user.RoleType ?? "AnimalOwner")
+            new Claim(ClaimTypes.Role, user.RoleType)
         };
 
             if (user.AnimalOwnerId.HasValue)
