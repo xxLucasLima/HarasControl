@@ -1,0 +1,58 @@
+<h2 class="mat-dialog-title" mat-dialog-title>Adicionar Animal</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="animal-form" autocomplete="off">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="name" required>
+    <mat-error *ngIf="form.controls['name'].hasError('required')">Nome é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Raça</mat-label>
+    <input matInput formControlName="breed">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Sexo</mat-label>
+    <mat-select formControlName="sex" required>
+      <mat-option value="Male">Macho</mat-option>
+      <mat-option value="Female">Fêmea</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.controls['sex'].hasError('required')">Sexo é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Data de Nascimento</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.controls['dateOfBirth'].hasError('required')">Data é obrigatória</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Microchip</mat-label>
+    <input matInput formControlName="microchipId">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Número de Registro</mat-label>
+    <input matInput formControlName="registrationNumber">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Temperamento</mat-label>
+    <input matInput formControlName="temperament">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Histórico Médico</mat-label>
+    <textarea matInput formControlName="medicalHistory" rows="2"></textarea>
+  </mat-form-field>
+
+  <div class="actions">
+<button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Salvar
+    </button>
+  </div>
+</form>

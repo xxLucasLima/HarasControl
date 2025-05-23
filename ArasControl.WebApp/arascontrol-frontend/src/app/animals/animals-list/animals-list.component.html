@@ -1,0 +1,34 @@
+<!-- animals-home.component.html -->
+<div class="animals-container">
+  <h2>Animais do Haras</h2>
+  <button mat-raised-button color="primary" class="full-width" (click)="openAddDialog()">
+    + Adicionar Animal
+  </button>
+
+  <table mat-table [dataSource]="animals" class="mat-elevation-z8">
+    <!-- Colunas -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let animal">{{ animal.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="breed">
+      <th mat-header-cell *matHeaderCellDef>Raça</th>
+      <td mat-cell *matCellDef="let animal">{{ animal.breed }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef>Sexo</th>
+      <td mat-cell *matCellDef="let animal">{{ animal.sex }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let animal">     
+        <button mat-button (click)="viewDetails(animal)">Detalhes</button>
+        <button mat-button color="accent" (click)="editAnimal(animal)">Editar</button>
+        <button mat-button color="warn" (click)="deleteAnimal(animal)">Excluir</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -44,18 +44,18 @@ export class SideMenuComponent {
       icon: 'groups',
       route: '/animal-owners',
       roles: ['HarasOwner'],
-    },
-    {
-      label: 'Animals',
-      icon: 'pets',
-      roles: ['HarasOwner'],
-      children: [
-        { label: 'Home', icon: 'dashboard', route: '/animals/home', roles: ['HarasOwner'] },
-        { label: 'Vaccines', icon: 'vaccines', route: '/animals/vaccines', roles: ['HarasOwner'] },
-        { label: 'Vitamins', icon: 'science', route: '/animals/vitamins', roles: ['HarasOwner'] },
-        { label: 'Feed Record', icon: 'restaurant', route: '/animals/feedrecord', roles: ['HarasOwner'] },
-      ],
-    }
+      },
+      {
+        label: 'Animals',
+        icon: 'pets',
+        roles: ['HarasOwner'],
+        children: [
+          { label: 'Home', icon: 'dashboard', route: '/dashboard/animals/home', roles: ['HarasOwner'] },
+          { label: 'Vaccines', icon: 'vaccines', route: '/animals/vaccines', roles: ['HarasOwner'] },
+          { label: 'Vitamins', icon: 'science', route: '/animals/vitamins', roles: ['HarasOwner'] },
+          { label: 'Feed Record', icon: 'restaurant', route: '/animals/feedrecord', roles: ['HarasOwner'] },
+        ],
+      }
   ];
 
   constructor(private authService: AuthService) {

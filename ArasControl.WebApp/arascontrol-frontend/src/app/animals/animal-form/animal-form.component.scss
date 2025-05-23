@@ -1,0 +1,25 @@
+.animal-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  max-width: 400px;
+    padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mat-dialog-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
