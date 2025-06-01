@@ -42,12 +42,13 @@ namespace ArasControl.WebApi.Controllers
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Role, user.RoleType)
         };
+            claims.Add(new Claim("HarasId", user.HarasId.ToString()));
 
             if (user.AnimalOwnerId.HasValue)
-                claims.Add(new Claim("AnimalOwnerId", user.AnimalOwnerId.ToString()));
+                claims.Add(new Claim("OwnerId", user.AnimalOwnerId.ToString()));
 
             if (user.HarasOwnerId.HasValue)
-                claims.Add(new Claim("HarasOwnerId", user.HarasOwnerId.ToString()));
+                claims.Add(new Claim("OwnerId", user.HarasOwnerId.ToString()));
 
             var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
             var expires = DateTime.UtcNow.AddHours(2);
@@ -77,7 +78,8 @@ namespace ArasControl.WebApi.Controllers
                 Email = request.Email,
                 AnimalOwnerId = request.AnimalOwnerId,
                 HarasOwnerId = request.HarasOwnerId,
-                RoleType = request.RoleType
+                RoleType = request.RoleType,
+                HarasId = request.HarasId
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 

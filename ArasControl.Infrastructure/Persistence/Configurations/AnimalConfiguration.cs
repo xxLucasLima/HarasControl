@@ -60,7 +60,6 @@ namespace ArasControl.Infrastructure.Persistence.Configurations
                    .HasMaxLength(100);
 
             builder.Property(a => a.MedicalHistory)
-                   .IsRequired()
                    .HasMaxLength(1000);
 
             // Relationships

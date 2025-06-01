@@ -6,6 +6,7 @@ namespace ArasControl.Domain.Entities.Auth
     {
         public Guid? AnimalOwnerId { get; set; }
         public Guid? HarasOwnerId { get; set; }
+        public Guid? HarasId { get; set; }
         public string RoleType { get; set; } // "AnimalOwner" ou "HarasOwner"
     }
 }

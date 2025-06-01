@@ -8,12 +8,16 @@ import { AnimalDto } from './models/animal-dto'; // importa do caminho certo
   providedIn: 'root'
 })
 export class AnimalService {
-  private readonly apiUrl = '/api/animals';
+  private readonly apiUrl = 'https://localhost:7004/api/animal';;
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<AnimalDto[]> {
     return this.http.get<AnimalDto[]>(this.apiUrl);
+  }
+
+  getByOwner(ownerId: string): Observable<AnimalDto[]> {
+    return this.http.get<AnimalDto[]>(`${this.apiUrl}/by-owner/${ownerId}`);
   }
 
   getById(id: string): Observable<AnimalDto> {

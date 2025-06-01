@@ -10,3 +10,14 @@ animals-container {
 button[mat-raised-button] {
   margin-bottom: 16px;
 }
+
+th.mat-mdc-header-cell,
+td.mat-mdc-cell,
+td.mat-mdc-footer-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #dfece6;
+}

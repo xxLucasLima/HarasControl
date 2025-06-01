@@ -23,6 +23,7 @@ namespace ArasControl.Application.DTOs
         public string Password { get; set; }
         public Guid? AnimalOwnerId { get; set; }
         public Guid? HarasOwnerId { get; set; }
+        public Guid? HarasId { get; set; }
         public string RoleType { get; set; }
     }
 }

@@ -5,6 +5,7 @@ import { AnimalDto } from '../models/animal-dto';
 import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-animals-list',
   templateUrl: './animals-list.component.html',
@@ -19,14 +20,26 @@ export class AnimalsListComponent implements OnInit {
   animals: AnimalDto[] = [];
   displayedColumns = ['name', 'breed', 'sex', 'actions'];
 
-  constructor(private animalService: AnimalService, private dialog: MatDialog) {}
+  constructor(
+    private animalService: AnimalService,
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loadAnimals();
   }
 
   loadAnimals() {
-    this.animalService.getAll().subscribe({
+    const HarasOwnerId = this.authService.getOwnerId();
+    console.log(HarasOwnerId);
+
+    if (!HarasOwnerId) {
+      this.animals = [];
+      return;
+    }
+
+    this.animalService.getByOwner(HarasOwnerId).subscribe({
       next: (res) => (this.animals = res),
     });
   }

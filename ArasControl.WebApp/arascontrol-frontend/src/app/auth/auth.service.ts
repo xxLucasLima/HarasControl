@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'https://localhost:7004/api/auth';
+  private tokenKey = 'jwt_token'; 
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +37,30 @@ export class AuthService {
     } catch {
       return '';
     }
+  }
+  getDecodedToken(): any {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    const payload = token.split('.')[1];
+    if (!payload) return null;
+
+    try {
+      return JSON.parse(atob(payload));
+    } catch {
+      return null;
+    }
+  }
+
+  getOwnerId(): string | null {
+    const decoded = this.getDecodedToken();
+    console.log(decoded);
+    return decoded.OwnerId || null ;
+  }
+
+  getHarasId(): string | null {
+    const decoded = this.getDecodedToken();
+    return decoded ? decoded.HarasId || null : null;
   }
 }
 

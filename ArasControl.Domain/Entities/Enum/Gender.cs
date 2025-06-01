@@ -14,6 +14,6 @@ namespace ArasControl.Domain.Entities.Enum
         Stallion,
         Mare,
         Colt,
-        Filly
+            
     }
 }
