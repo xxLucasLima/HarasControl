@@ -1,0 +1,38 @@
+<!-- animal-details.component.html -->
+
+<mat-tab-group>
+  <!-- Aba de informações gerais do animal -->
+  <mat-tab label="Dados Gerais">
+    <app-animal-info-tab
+      [animalId]="animalId">
+    </app-animal-info-tab>
+  </mat-tab>
+
+  <!-- Aba de Alimentação -->
+  <mat-tab label="Alimentação">
+    <app-feed-records-tab
+      [animalId]="animalId">
+    </app-feed-records-tab>
+  </mat-tab>
+
+  <!-- Aba de Vacinas -->
+  <mat-tab label="Vacinas">
+    <app-vaccine-records-tab
+      [animalId]="animalId">
+    </app-vaccine-records-tab>
+  </mat-tab>
+
+  <!-- Aba de Vitaminas -->
+  <mat-tab label="Vitaminas">
+    <app-vitamin-doses-tab
+      [animalId]="animalId">
+    </app-vitamin-doses-tab>
+  </mat-tab>
+
+  <!-- Aba de Estoque -->
+  <mat-tab label="Estoque de Ração">
+    <app-feed-inventory-tab
+      [animalId]="animalId">
+    </app-feed-inventory-tab>
+  </mat-tab>
+</mat-tab-group>

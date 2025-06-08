@@ -23,6 +23,7 @@ namespace ArasControl.Application.Queries.Animal.Handler
             var animals = await _repo.ListByOwnerAsync(request.OwnerId);
             return animals.Select(a => new AnimalDto
             {
+                Id = a.Id,
                 Name = a.Name,
                 Breed = a.Breed,
                 Color = a.Color,

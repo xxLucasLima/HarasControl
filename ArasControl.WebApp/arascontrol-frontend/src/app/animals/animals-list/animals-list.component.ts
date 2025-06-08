@@ -6,6 +6,8 @@ import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-animals-list',
   templateUrl: './animals-list.component.html',
@@ -23,7 +25,9 @@ export class AnimalsListComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
+
   ) {}
 
   ngOnInit() {
@@ -56,7 +60,9 @@ export class AnimalsListComponent implements OnInit {
   }
 
   viewDetails(animal: AnimalDto) {
-    // Abre detalhes (depois a gente implementa)
+      console.log('Animal:', animal);
+  console.log('ID:', animal.id);
+    this.router.navigate(['/dashboard/animals', animal.id]);
   }
 
   editAnimal(animal: AnimalDto) {
